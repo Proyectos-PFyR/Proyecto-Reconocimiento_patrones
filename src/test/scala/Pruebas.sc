@@ -1,15 +1,15 @@
 import Huffman._
 
-hacerNodoArbolH(Hoja('A', 5), Hoja('B', 6))
+/*hacerNodoArbolH(Hoja('A', 5), Hoja('B', 6))
 
 val a = hacerNodoArbolH(Nodo(Hoja('A', 5), Hoja('B', 6), List('A', 'B'), 11), Nodo(Hoja('C', 3), Hoja('D', 2), List('C', 'D'), 5))
 
 peso(a)
 cars(a)
 
-val z = List('A', 'B', 'B', 'C', 'A', 'A', 'D', 'D', 'D', 'D')
+val z = List('M', 'I', 'M', 'A', 'M', 'A', 'M', 'E', 'M', 'I', 'M', 'A')
 
-val b = ocurrencias(List('A', 'B', 'B', 'C', 'A', 'A', 'D', 'D', 'D', 'D'))
+val b = ocurrencias(List('A', 'B', 'B', 'C', 'A', 'A', 'C', 'D', 'D'))
 
 listaDeHojasOrdenadas(b)
 
@@ -21,8 +21,11 @@ val f = List(Nodo(Hoja('A', 5), Hoja('B', 6), List('A', 'B'), 11), Nodo(Hoja('C'
 listaUnitaria(c)
 listaUnitaria(d)
 listaUnitaria(e)
-listaUnitaria(f)
+listaUnitaria(f)*/
 
-combinar(c)
+val z = List('M', 'I', 'M', 'A', 'M', 'A', 'M', 'E', 'M', 'I', 'M', 'A')
 
-crearArbolDeHuffman(z)
+val g = crearArbolDeHuffman(z)
+
+decodificar(g, List(0,1,1,0))
+

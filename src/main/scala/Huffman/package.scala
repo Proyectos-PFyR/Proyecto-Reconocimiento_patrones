@@ -1,3 +1,5 @@
+import scala.collection.generic.BitOperations
+
 package object Huffman
 {
   abstract class ArbolH
@@ -102,18 +104,48 @@ package object Huffman
     }
   }
 
-  def combinar(arboles: List[ArbolH]): List[ArbolH] =
-  {
+  def combinar(arboles: List[ArbolH]): List[ArbolH] = {
     arboles match
     {
       case Nil => Nil
-      case a :: b :: tail => combinar(hacerNodoArbolH(a, b) :: combinar(tail))
+      case a :: b :: tail => hacerNodoArbolH(a, b) :: tail
       case _ => arboles
+    }
+  }
+
+  def hastaQue (cond: List[ArbolH] => Boolean, mezclar: List[ArbolH] => List[ArbolH])(listaOrdenadaArboles: List[ArbolH]): List[ArbolH] =
+  {
+    if(cond(listaOrdenadaArboles))
+    {
+      mezclar(listaOrdenadaArboles)
+    }
+    else
+    {
+      hastaQue(cond, mezclar)(mezclar(listaOrdenadaArboles))
     }
   }
 
   def crearArbolDeHuffman(cars: List[Char]): ArbolH =
   {
-    combinar(listaDeHojasOrdenadas(ocurrencias(cars))).head
+    hastaQue(listaUnitaria, combinar)(listaDeHojasOrdenadas(ocurrencias(cars))).head
+  }
+
+  type Bit = Int
+
+  def decodificar(arbol: ArbolH, bits: List[Bit]): List[Char] =
+  {
+    println(arbol)
+
+    val arbl = arbol
+    println(arbl)
+    bits match
+    {
+      case head :: tail => arbol match
+      {
+        case Nodo(izq, der, cars, peso) => if(head == 0) decodificar(izq, tail) else decodificar(der, tail)
+        case Hoja(car, peso) => car :: decodificar(arbl, bits.tail)
+      }
+      case Nil => Nil
+    }
   }
 }
