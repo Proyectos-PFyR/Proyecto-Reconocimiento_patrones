@@ -6,6 +6,11 @@ package object Huffman
   case class Nodo(izq: ArbolH, der: ArbolH, cars: List[Char], peso: Int) extends ArbolH
   case class Hoja(car: Char, peso: Int) extends ArbolH
 
+  def hacerNodoArbolH(izq: ArbolH, der: ArbolH): Nodo =
+  {
+    Nodo(izq, der, cars(izq) ::: cars(der), peso(izq) + peso(der))
+  }
+
   def peso(arbol: ArbolH): Int =
   {
     arbol match
@@ -22,11 +27,6 @@ package object Huffman
       case Nodo(izq, der, cars, peso) => cars
       case Hoja(car, peso) => List(car)
     }
-  }
-
-  def hacerNodoArbolH(izq: ArbolH, der: ArbolH): Nodo =
-  {
-    Nodo(izq, der, cars(izq) ::: cars(der), peso(izq) + peso(der))
   }
 
   def ocurrencias(cars: List[Char]): List[(Char, Int)] =
@@ -117,7 +117,7 @@ package object Huffman
   {
     if(cond(listaOrdenadaArboles))
     {
-      mezclar(listaOrdenadaArboles)
+      listaOrdenadaArboles
     }
     else
     {
