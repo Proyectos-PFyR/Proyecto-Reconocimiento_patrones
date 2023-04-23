@@ -1,5 +1,3 @@
-import scala.collection.generic.BitOperations
-
 package object Huffman
 {
   abstract class ArbolH
@@ -94,6 +92,27 @@ package object Huffman
     ordenar(convertir(frecs))
   }
 
+  def ordenar2(frecsOrd: List[ArbolH]): List[ArbolH] = {
+    def orden(frecsOrd1: List[ArbolH], frecsOrd2: List[ArbolH]): List[ArbolH] = {
+      frecsOrd1 match {
+        case Nil => frecsOrd2
+        case head1 :: tail1 => frecsOrd2 match {
+          case Nil => frecsOrd1
+          case head2 :: tail2 => if (peso(head1) < peso(head2)) head1 :: orden(tail1, frecsOrd2) else if (peso(head1) == peso(head2)) head1 :: orden(tail1, frecsOrd2) else head2 :: orden(frecsOrd1, tail2)
+        }
+      }
+    }
+
+    val n = frecsOrd.length / 2
+    if (n == 0) {
+      frecsOrd
+    }
+    else {
+      val (frecs1, frecs2) = frecsOrd splitAt n
+      orden(ordenar2(frecs1), ordenar2(frecs2))
+    }
+  }
+
   def listaUnitaria(arboles: List[ArbolH]): Boolean =
   {
     arboles match
@@ -115,16 +134,17 @@ package object Huffman
 
   def hastaQue (cond: List[ArbolH] => Boolean, mezclar: List[ArbolH] => List[ArbolH])(listaOrdenadaArboles: List[ArbolH]): List[ArbolH] =
   {
+    println(listaOrdenadaArboles)
     if(cond(listaOrdenadaArboles))
     {
       listaOrdenadaArboles
     }
     else
     {
-      hastaQue(cond, mezclar)(mezclar(listaOrdenadaArboles))
+      hastaQue(cond, mezclar)(ordenar2(mezclar(listaOrdenadaArboles)))
     }
-  }
 
+  }
   def crearArbolDeHuffman(cars: List[Char]): ArbolH =
   {
     hastaQue(listaUnitaria, combinar)(listaDeHojasOrdenadas(ocurrencias(cars))).head
@@ -132,20 +152,23 @@ package object Huffman
 
   type Bit = Int
 
-  def decodificar(arbol: ArbolH, bits: List[Bit]): List[Char] =
-  {
-    println(arbol)
-
-    val arbl = arbol
-    println(arbl)
-    bits match
-    {
-      case head :: tail => arbol match
-      {
-        case Nodo(izq, der, cars, peso) => if(head == 0) decodificar(izq, tail) else decodificar(der, tail)
-        case Hoja(car, peso) => car :: decodificar(arbl, bits.tail)
+  def decodificar(arbol: ArbolH, bits: List[Bit]): List[Char] = {
+    def recorrerArbol(auxArbol: ArbolH, auxBits: List[Bit]): List[Char] = {
+      println("iteracion")
+      println(auxArbol)
+      println(auxBits)
+      auxBits match {
+        case head :: tail => auxArbol match {
+          case Nodo(izq, der, cars, peso) => if (head == 1) recorrerArbol(izq, tail) else recorrerArbol(der, tail)
+          case Hoja(car, peso) => car :: decodificar(arbol, auxBits)
+        }
+        case Nil => auxArbol match {
+          case Nodo(izq, der, cars, peso) => Nil
+          case Hoja(car, peso) => car :: Nil
+        }
       }
-      case Nil => Nil
     }
+    recorrerArbol(arbol,bits)
   }
+
 }
