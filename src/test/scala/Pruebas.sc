@@ -56,6 +56,13 @@ val cars6 = List('A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A'
 
 val bits1 = List(0, 1, 0 , 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0)
 val bits2 = List(0, 0, 1, 1)
+
+val tablaCodigos1 = List(('A',List(0,0)), ('B',List(0,1,0)), ('C',List(1,1,0)))
+val tablaCodigos2 = List(('D',List(0,1,1,0)), ('E',List(1,0)), ('F',List(1,1,1)))
+
+val tablaHijo1 = List(('A',List(0)), ('B',List(1,0)), ('D',List(1,1,0)))
+val tablaHijo2 = List(('E',List(0)), ('F',List(1,1)))
+/*
 /******************************************************************************
  * FUNCIÓN:                peso
  ******************************************************************************/
@@ -102,7 +109,23 @@ crearArbolDeHuffman(cars4)
 crearArbolDeHuffman(cars5)
 crearArbolDeHuffman(cars6)
 
+ */
 /******************************************************************************
  * FUNCIÓN:                decodificar
  ******************************************************************************/
 decodificar(crearArbolDeHuffman(cars6), bits1)
+
+
+/******************************************************************************
+ * FUNCIÓN:                codigoEnBits
+ ******************************************************************************/
+codigoEnBits(tablaCodigos1)('A')
+codigoEnBits(tablaCodigos1)('B')
+codigoEnBits(tablaCodigos1)('C')
+codigoEnBits(tablaCodigos1)('D')
+
+/******************************************************************************
+ * FUNCIÓN:                mezclarTablasDeCodigos
+ ******************************************************************************/
+mezclarTablasDeCodigos(tablaHijo1,tablaHijo2)
+
