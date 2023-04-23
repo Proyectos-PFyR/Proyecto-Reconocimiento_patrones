@@ -51,8 +51,11 @@ val cars1 = List('Q', 'U', 'E', 'E', 'S', 'E', 'S', 'O')
 val cars2 = List('A', 'A', 'A', 'B', 'B', 'C')
 val cars3 = List('D', 'D', 'D')
 val cars4 = List('Z', 'Z', 'L', 'Z', 'Z', 'L', 'L', 'Z', 'Z', 'L')
-val cars5 = List('M', 'I', 'M', 'A', 'M', 'A', 'M', 'E', 'M', 'I', 'M', 'A')
+val cars5 = List('M', 'I' , 'M', 'A', 'M', 'A', 'M', 'E', 'M', 'I', 'M', 'A')
+val cars6 = List('A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'C', 'C', 'C', 'C', 'C', 'D', 'D', 'D', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'F', 'F', 'F', 'F', 'G', 'H', 'H')
 
+val bits1 = List(0, 1, 0 , 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0)
+val bits2 = List(0, 0, 1, 1)
 /******************************************************************************
  * FUNCIÓN:                peso
  ******************************************************************************/
@@ -97,3 +100,9 @@ crearArbolDeHuffman(cars2)
 crearArbolDeHuffman(cars3)
 crearArbolDeHuffman(cars4)
 crearArbolDeHuffman(cars5)
+crearArbolDeHuffman(cars6)
+
+/******************************************************************************
+ * FUNCIÓN:                decodificar
+ ******************************************************************************/
+decodificar(crearArbolDeHuffman(cars6), bits1)
