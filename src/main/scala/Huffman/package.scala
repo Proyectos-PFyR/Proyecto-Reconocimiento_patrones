@@ -171,4 +171,55 @@ package object Huffman
     recorrerArbol(arbol,bits)
   }
 
+  /*
+  def codificar(arbol: ArbolH)(texto: List[Char]): List[Bit] ={
+  def concatenarLista(auxArbol: ArbolH, auxNodo: ArbolH,auxTexto: List[Char], dir: String): List[Bit] ={
+    auxTexto match{
+      case head :: tail => auxNodo match {
+        case Nodo(izq, der, cars, peso) => if()
+      }
+      case Nil => Nil
+    }
+  }
+
+  def encontrarCaracter(nodo: ArbolH, auxRama: ArbolH, c:List[Char], dir:String): List[Bit] = {
+    auxRama match {
+      case Nodo(izq, der, cars, peso) => if(dir.equals("izq")) 0 :: encontrarCaracter(nodo,izq,c,"izq") else 1::encontrarCaracter(nodo, der,c,"der")
+      case Hoja(car, peso) => if(car.equals(c.head) && dir == "izq") 0 :: codificar(arbol)(texto.tail) else if(car.equals(c.head) && dir == "der") 1 :: codificar(arbol)(texto.tail) else encontrarCaracter(arbol,arbol,c,"der")
+  }
+  }
+
+  concatenarLista(texto)
+  }
+   */
+
+  type TablaCodigos = List [(Char, List[Bit])]
+
+  def codigoEnBits(tabla: TablaCodigos)(car: Char): List[Bit] = {
+    tabla match {
+      case head::tail => val datosHead = head; val (d1, d2) = datosHead; if(car.equals(d1)) d2 else codigoEnBits(tail)(car)
+      case Nil => Nil
+    }
+  }
+
+  def mezclarTablasDeCodigos(a: TablaCodigos, b: TablaCodigos): TablaCodigos = {
+
+    def concatenarPrefijo(prefijo: Int, auxTabla: TablaCodigos) : TablaCodigos = {
+      auxTabla match {
+        case head::tail => val datosHead = head; val (d1,d2) = datosHead; List((d1, prefijo::d2)) ++ concatenarPrefijo(prefijo, tail)
+        case Nil => Nil
+      }
+    }
+    a match {
+      case head => b match {
+        case head => concatenarPrefijo(0,a) ++ concatenarPrefijo(1,b)
+        case Nil => concatenarPrefijo(0,a)
+      }
+      case Nil => b match {
+        case head => concatenarPrefijo(1,b)
+        case Nil => Nil
+      }
+    }
+  }
+
 }
