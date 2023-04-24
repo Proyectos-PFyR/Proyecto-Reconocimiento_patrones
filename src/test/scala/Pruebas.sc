@@ -53,6 +53,7 @@ val cars3 = List('D', 'D', 'D')
 val cars4 = List('Z', 'Z', 'L', 'Z', 'Z', 'L', 'L', 'Z', 'Z', 'L')
 val cars5 = List('M', 'I' , 'M', 'A', 'M', 'A', 'M', 'E', 'M', 'I', 'M', 'A')
 val cars6 = List('A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'A', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'B', 'C', 'C', 'C', 'C', 'C', 'D', 'D', 'D', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'E', 'F', 'F', 'F', 'F', 'G', 'H', 'H')
+val cars7 = List('B','A','D','A','E','A','D','F','A','C')
 
 val bits1 = List(0, 1, 0 , 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 0)
 val bits2 = List(0, 0, 1, 1)
@@ -115,7 +116,11 @@ crearArbolDeHuffman(cars6)
  ******************************************************************************/
 decodificar(crearArbolDeHuffman(cars6), bits1)
 
+codificar(crearArbolDeHuffman(cars6))(List())
 
+convertir(crearArbolDeHuffman(cars6))
+
+codificarRapido(crearArbolDeHuffman(cars6))(cars7)
 /******************************************************************************
  * FUNCIÓN:                codigoEnBits
  ******************************************************************************/
