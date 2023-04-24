@@ -171,7 +171,7 @@ package object Huffman
     recorrerArbol(arbol,bits)
   }
 
-
+ /*
   def codificar(arbol: ArbolH)(texto: List[Char]): List[Bit] =
   {
     def encontrarCaracter(arbolito: ArbolH, auxTexto: List[Char]): List[Bit] =
@@ -193,6 +193,21 @@ package object Huffman
     }
 
   concatenarLista(arbol,texto)
+  }
+
+  */
+
+  def codificar(arbol: ArbolH)(texto: List[Char]): List[Bit] = {
+    def encontrarCaracter(arbolito: ArbolH, auxTexto: List[Char]): List[Bit] = {
+      auxTexto match {
+        case head :: tail => arbolito match {
+          case Nodo(izq, der, carss, peso) => if (cars(izq).contains(auxTexto.head)) 1 :: encontrarCaracter(izq, auxTexto) else if (cars(der).contains(auxTexto.head)) 0 :: encontrarCaracter(der, auxTexto) else encontrarCaracter(arbol, auxTexto.tail)
+          case Hoja(car, peso) => encontrarCaracter(arbol, auxTexto.tail)
+      }
+        case Nil => Nil
+      }
+    }
+    encontrarCaracter(arbol, texto)
   }
 
   type TablaCodigos = List [(Char, List[Bit])]
