@@ -116,11 +116,11 @@ crearArbolDeHuffman(cars6)
  ******************************************************************************/
 decodificar(crearArbolDeHuffman(cars6), bits1)
 
-codificar(crearArbolDeHuffman(cars6))(List())
+codificar(crearArbolDeHuffman(cars6))(cars7)
 
 convertir(crearArbolDeHuffman(cars6))
 
-codificarRapido(crearArbolDeHuffman(cars6))(cars7)
+codificarRapido(crearArbolDeHuffman(cars6))(_)
 /******************************************************************************
  * FUNCIÓN:                codigoEnBits
  ******************************************************************************/
